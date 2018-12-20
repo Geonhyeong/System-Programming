@@ -65,6 +65,7 @@ int display_menu(void)
 		printf("\n\t\t\t  △   : Shift");
 		printf("\n\t\t\t◁   ▷ : Left / Right");
 		printf("\n\t\t\t  ▽   : Soft Drop");
+		printf("\n\t\t\tspace bar : Hard Drop");
 		printf("\n\n\t\t\t1) 게임 시작");
 		printf("\n\t\t\t2) 기록 검색");
 		printf("\n\t\t\t3) 기록 출력");

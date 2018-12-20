@@ -232,10 +232,6 @@ int init_tetris_table(void)
 	return 0;
 }
 
-
-
-
-
 /*문자를 바로 입력 받을 수 있는 함수*/
 int _getch(void)
 {
@@ -362,8 +358,7 @@ int _refresh(int signum)
 		case 73	 :
 		case 105 :	move_block(ROTATE);
 								break;
-		case 65  :
-		case 97  :	drop();
+		case ' '  :	drop();
 								break;
  		case 80  :
  		case 112 :	downcount = 0;
