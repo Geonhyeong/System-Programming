@@ -232,6 +232,10 @@ int init_tetris_table(void)
 	return 0;
 }
 
+
+
+
+
 /*문자를 바로 입력 받을 수 있는 함수*/
 int _getch(void)
 {
@@ -291,7 +295,7 @@ int _refresh(int signum)
 //	refresh();	
 
 	display_tetris_table(speed);
-	check_one_line();
+//	check_one_line();
 
 	printw("\n Stop Game : P");
 	refresh();
@@ -332,6 +336,7 @@ int _refresh(int signum)
 	{
 		if(setcount == 9)
 		{
+			check_one_line();
 			block_number= next_block_number;
 			next_block_number = rand()%7;
 			block_state = 0;
@@ -617,6 +622,7 @@ int check_one_line(void)
 					tetris_table[ni][nj] = tetris_table[ni-1][nj];
 				}
 			}
+			i += 1;
 		}
 	}
 
