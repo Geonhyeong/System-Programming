@@ -20,14 +20,14 @@ int main(void)
 {
 	int menu = 1;
 
-	while(menu)
+	while(1)
 	{
 		menu = display_menu();
 
 		if(menu == 1)
 		{
 			game = GAME_START;
-			menu = game_start();
+			game_start();
 		}
 		else if(menu == 2)
 		{

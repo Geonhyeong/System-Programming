@@ -1,7 +1,7 @@
 #ifndef Tetris_H
 #define Tetris_H
 
-int getch(void);/*문자를 바로 입력 받을 수 있는 함수*/
+int _getch(void);/*문자를 바로 입력 받을 수 있는 함수*/
 
 /* 게임 종료때 마다
  * 이름과 득점점수와
@@ -16,7 +16,6 @@ static struct result
 	int day;
 	int hour;
 	int min;
-	int rank;
 }temp_result;
 
 #endif

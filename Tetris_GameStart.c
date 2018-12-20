@@ -203,6 +203,7 @@ int game_start(void)
 			if(game == GAME_END)
 			{
 				game_end();
+				endwin();
 				return 1;
 			}
 		}
@@ -664,7 +665,7 @@ void game_end(){
 	refresh();
 	scanw("%s%*c", temp_result.name);
 	temp_result.point = point;
-	endwin();	
+	//endwin();	
 
 	if(temp_result.point >= best_point)
 		best_point = temp_result.point;
@@ -679,9 +680,10 @@ void game_end(){
 	temp_result.hour = t->tm_hour;
 	temp_result.min = t->tm_min;
 
-	fp = fopen("result", "ab");
+	fp = fopen("result.txt", "a");
 	fseek(fp, 1, SEEK_END);
-	fwrite(&temp_result, sizeof(struct result), 1, fp);
+	//fwrite(&temp_result, sizeof(struct result), 1, fp);
+	fprintf(fp, "%s %ld %d %d %d %d %d\n", temp_result.name, temp_result.point, temp_result.year, temp_result.month, temp_result.day, temp_result.hour, temp_result.min);
 	fclose(fp);
 
 	x = 3, y =0;
