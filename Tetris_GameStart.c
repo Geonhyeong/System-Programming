@@ -9,6 +9,7 @@
 #include <sys/types.h>
 #include <time.h>
 #include "Tetris_GameStart.h"
+#include <curses.h>
 
 char tetris_table[21][10];
 
@@ -184,13 +185,15 @@ long point = 0; /* 현재 게임중 득점을 알려주는 변수 */
 /* 게임 시작시 호출되는 함수.   game변수를 참조하여 게임을 종료하거나 시작함 . 게임 시작시 refresh()함수가 콜백함수로 설정되고 타이머를 등록함. */
 int game_start(void)
 {
-	int refresh(int);
+	int _refresh(int);
 
 	if(game == GAME_START)
 	{
+		initscr();
+		clear();
 		init_tetris_table();
 
-		signal(SIGVTALRM,refresh);
+		signal(SIGVTALRM,_refresh);
 		if(set_ticker(game)==-1)
 			perror("set_ticker");
 
@@ -233,7 +236,7 @@ int init_tetris_table(void)
 
 
 /*문자를 바로 입력 받을 수 있는 함수*/
-int getch(void)
+int _getch(void)
 {
              char   ch;
              int   error;
@@ -269,7 +272,7 @@ int getch(void)
 }
 
 /* 타이머에 콜백함수로 등록되어 계속 새로고침 하면서 호출되는 함수. 키입력 확인,  화면새로고침, 한줄완성검사등의 계속 상태가 변함을 확인해야 되는 함수를 호출한다 */
-int refresh(int signum)
+int _refresh(int signum)
 {
 	static int downcount = 0;
 	static int setcount = 0;
@@ -287,12 +290,14 @@ int refresh(int signum)
 		firststart++;
 	}
 
-	printf("\n 득점 : %ld | 속도 : %d | 최고점수  : %d", point, speed, best_point);
+//	printw("\n Score : %ld | Speed : %d | Best Score : %d", point, speed, best_point);
+//	refresh();	
 
-	display_tetris_table();
+	display_tetris_table(speed);
 	check_one_line();
 
-	printf("\n 게임 정지 : P");
+	printw("\n Stop Game : P");
+	refresh();
 
 	if(downcount == speed-1)
 	{
@@ -315,7 +320,8 @@ int refresh(int signum)
 	{
 		if(collision_test(LEFT) || collision_test(RIGHT) || collision_test(DOWN) || collision_test(ROTATE))
 		{
-			printf("\n Game End! \n");
+			printw("\n Game End! \n");
+			refresh();
 			downcount = 0;
 			setcount = 0;
 			speedcount = 0;
@@ -339,7 +345,7 @@ int refresh(int signum)
 		setcount %= 10;
 	}
 
-	ch = getch();
+	ch = _getch();
 
 	switch(ch)
 	{
@@ -372,7 +378,7 @@ int refresh(int signum)
 }
 
 /* 현재의 테트리스판을 보여준다. 블록이 놓이고 쌓인 현재 상태를 보여줌*/
-int display_tetris_table(void)
+int display_tetris_table(int speed)
 {
 	int i, j;
 	char (*block_pointer)[4][4][4] = NULL;
@@ -388,40 +394,45 @@ int display_tetris_table(void)
 		case O_BLOCK :	block_pointer = &o_block; break;
 	}
 
-	system("clear");
+//	system("clear");
+	clear();
 
-
-	printf("\n\n Next Block\n");
+	printw("\n Score : %ld | Speed : %d | Best Score : %d", point, speed, best_point);
+	printw("\n\n Next Block\n");
 
 	for(i = 0 ; i < 4 ; i++)
 	{
-		printf("\n ");
+		addstr("\n ");
 		for(j = 0 ; j < 4 ; j++)
 		{
 			if((*block_pointer)[0][i][j] == 1)
-				printf("▣ ");
+				//addstr("▣ ");
+				printw("O ");
 			else if((*block_pointer)[0][i][j] == 0)
-				printf("　");
+				printw("  ");
 		}
 	}
-	printf("\n ");
+	printw("\n ");
 
 	for(i = 2 ; i < 21 ; i++)
 	{
-		printf("\t");
+		printw("\t");
 		for(j = 0 ; j < 10 ; j++)
 		{
 			if(j == 0 || j == 9|| (i == 20 && (j > 1 || j < 9)))
 			{
-				printf("■ ");
+				//addstr("■ ");
+				printw("X ");
 			}
 			else if(tetris_table[i][j] == 1)
-				printf("▣ ");
+				//addstr("▣ ");
+				printw("O ");
 			else if(tetris_table[i][j] == 0)
-				printf("　");
+				printw("  ");
 		}
-		printf("\n");
+		addstr("\n");
 	}
+	refresh();	
 
 	return 0;
 }
@@ -646,10 +657,12 @@ void game_end(){
 
 	// 기록 파일로 저장
 
-	printf("\n\n 최종 득점 : %ld ", point);
-	printf("\n\n 이름을 입력 하세요 : ");
-	scanf("%s%*c", temp_result.name);
+	printw("\n\n Final Score : %ld ", point);
+	printw("\n\n Input your name : ");
+	refresh();
+	scanw("%s%*c", temp_result.name);
 	temp_result.point = point;
+	endwin();	
 
 	if(temp_result.point >= best_point)
 		best_point = temp_result.point;
