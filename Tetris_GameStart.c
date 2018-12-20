@@ -664,6 +664,8 @@ void game_end(){
 	printw("\n\n Input your name : ");
 	refresh();
 	scanw("%s%*c", temp_result.name);
+	if (!strcmp(temp_result.name, ""))
+		strcpy(temp_result.name, "NULL");
 	temp_result.point = point;
 	//endwin();	
 
