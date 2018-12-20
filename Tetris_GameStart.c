@@ -9,7 +9,8 @@
 #include <sys/types.h>
 #include <time.h>
 #include "Tetris_GameStart.h"
-#include <curses.h>
+#include<locale.h>
+#include<ncursesw/curses.h>
 
 char tetris_table[21][10];
 
@@ -186,7 +187,7 @@ long point = 0; /* 현재 게임중 득점을 알려주는 변수 */
 int game_start(void)
 {
 	int _refresh(int);
-
+	setlocale(LC_CTYPE, "ko_KR.utf-8");
 	if(game == GAME_START)
 	{
 		initscr();
@@ -407,7 +408,7 @@ int display_tetris_table(int speed)
 		{
 			if((*block_pointer)[0][i][j] == 1)
 				//addstr("▣ ");
-				printw("O ");
+				printw("▣ ");
 			else if((*block_pointer)[0][i][j] == 0)
 				printw("  ");
 		}
@@ -422,11 +423,11 @@ int display_tetris_table(int speed)
 			if(j == 0 || j == 9|| (i == 20 && (j > 1 || j < 9)))
 			{
 				//addstr("■ ");
-				printw("X ");
+				printw("■ ");
 			}
 			else if(tetris_table[i][j] == 1)
 				//addstr("▣ ");
-				printw("O ");
+				printw("▣ ");
 			else if(tetris_table[i][j] == 0)
 				printw("  ");
 		}
