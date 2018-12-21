@@ -235,8 +235,8 @@ int display_menu(void)
 		printw("\n\t\t\tPlease Enter Any Key to Start..");
 		printw("\n\t\t\t  △   : 1p - w, 2p - i");
 		printw("\n\t\t\t◁   ▷ : 1p - a/d, 2p - j/l");
-		printw("\n\t\t\t  ▽   : Soft Drop");
-		printw("\n\t\t\tspace bar : Hard Drop");
+		printw("\n\t\t\t  ▽   : 1p - s, 2p - k");
+		printw("\n\t\t\tHard Drop : 1p - space bar, 2p - ]");
 		printw("\n\n\t\t\t1) 혼자서 하기");
 		printw("\n\t\t\t2) 둘이서 하기");
 		printw("\n\t\t\t3) 기록 검색");
