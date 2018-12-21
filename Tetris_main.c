@@ -11,6 +11,8 @@
 #include "Tetris_GameStart.h"
 #include "Tetris_Result.h"
 #include "Tetris_Search.h"
+#include <ncursesw/curses.h>
+#include <locale.h>
 
 int game = GAME_END; /*게임 상태 변수, 게임이 시작되거나 종료됨에 따라 변한다*/
 
@@ -54,31 +56,34 @@ int display_menu(void)
 
 	while(1)
 	{
-		system("clear");
-		printf("\n\n\t\t\t■ □ □ □ ■ ■ ■ □ □ ■ ■ □ ■ ■ "); 
-		printf("\n\t\t\t■ ■ ■ □ □ ■ □ □ □ ■ ■ □ □ ■ "); //sleep(1);refresh();
-		printf("\n\t\t\t□ □ □ ■ □ □ □ □ □ □ □ ■ □ ■ ");
-		printf("\n\t\t\t■ ■ □ ■ ■ □ □ ■ □ □ □ ■ □ □ "); 
-		printf("\n\t\t\t■ ■ □ ■ □ □ □ ■ ■ ■ □ ■ ■ □ ");//sleep(1);refresh();
-		printf("\n\t\t\t\tT E T R I S"); 
-		printf("\n\t\t\tPlease Enter Any Key to Start..");
-		printf("\n\t\t\t  △   : Shift");
-		printf("\n\t\t\t◁   ▷ : Left / Right");
-		printf("\n\t\t\t  ▽   : Soft Drop");
-		printf("\n\t\t\tspace bar : Hard Drop");
-		printf("\n\n\t\t\t1) 게임 시작");
-		printf("\n\t\t\t2) 기록 검색");
-		printf("\n\t\t\t3) 기록 출력");
-		printf("\n\t\t\t4) 종료");
-		printf("\n\n\t\t\t\t\t 선택 : ");
+		initscr();
+		clear();
+		printw("\n\n\t\t\t■ □ □ □ ■ ■ ■ □ □ ■ ■ □ ■ ■ "); 
+		printw("\n\t\t\t■ ■ ■ □ □ ■ □ □ □ ■ ■ □ □ ■ "); //sleep(1);refresh();
+		printw("\n\t\t\t□ □ □ ■ □ □ □ □ □ □ □ ■ □ ■ ");
+		printw("\n\t\t\t■ ■ □ ■ ■ □ □ ■ □ □ □ ■ □ □ "); 
+		printw("\n\t\t\t■ ■ □ ■ □ □ □ ■ ■ ■ □ ■ ■ □ ");//sleep(1);refresh();
+		printw("\n\t\t\t\tT E T R I S"); 
+		printw("\n\t\t\tPlease Enter Any Key to Start..");
+		printw("\n\t\t\t  △   : Shift");
+		printw("\n\t\t\t◁   ▷ : Left / Right");
+		printw("\n\t\t\t  ▽   : Soft Drop");
+		printw("\n\t\t\tspace bar : Hard Drop");
+		printw("\n\n\t\t\t1) 게임 시작");
+		printw("\n\t\t\t2) 기록 검색");
+		printw("\n\t\t\t3) 기록 출력");
+		printw("\n\t\t\t4) 종료");
+		printw("\n\n\t\t\t\t\t 선택 : ");
 
-		scanf("%d",&menu);
+		scanw("%d",&menu);
 		if(menu < 1 || menu > 4)
 		{
+			endwin();
 			continue;
 		}
 		else
 		{
+			endwin();
 			return menu;
 		}
 	}
