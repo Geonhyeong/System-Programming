@@ -162,17 +162,13 @@ int _refresh(int signum)
 
 	switch(ch)
 	{
-		case 74	 :
-		case 106 :	move_block(LEFT);
+		case 'a' :	move_block(LEFT);
 					  		break;
-		case 76	 :
-		case 108 :	move_block(RIGHT);
+		case 'd' :	move_block(RIGHT);
 						  	break;
-		case 75	 :
-		case 107 :	move_block(DOWN);
+		case 's' :	move_block(DOWN);
 								break;
-		case 73	 :
-		case 105 :	move_block(ROTATE);
+		case 'w' :	move_block(ROTATE);
 								break;
 		case ' '  :	drop();
 								break;
@@ -404,7 +400,7 @@ int drop(void)
 	return 0;
 }
 
-/* 한줄이 완성되었는지 확인하는 함수. 완성되면 한줄을 지우고, 점수에 1000점을 더한다*/
+/* 한줄이 완성되었는지 확인하는 함수. 완성되면 한줄을 지우고, 점수에 100점을 더한다*/
 int check_one_line(void)
 {
 	int i, j;
@@ -425,7 +421,7 @@ int check_one_line(void)
 
 		if(line_hole == 0)
 		{
-			point += 1000;
+			point += 100;
 			for(ni = i ; ni > 0 ; ni--)
 			{
 				for(nj = 0 ; nj < 9 ; nj++)
