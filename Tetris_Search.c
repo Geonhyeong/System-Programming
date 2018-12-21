@@ -36,22 +36,15 @@ int search_result(void)
 	printw("\n\t\t\t\t 게임 기록\n\n");
 	printw("\n\t\t이름\t\t점수\t   날짜\t\t 시간");
 
-	while(1)
+	while(!feof(fp))
 	{
 		//fread(&temp_result, sizeof(struct result), 1, fp);
 		fscanf(fp, "%s %ld %d %d %d %d %d\n", temp_result.name, &temp_result.point,&temp_result.year, &temp_result.month, &temp_result.day, &temp_result.hour, &temp_result.min);
-		if(!feof(fp))
+		if(!strcmp(temp_result.name, name))
 		{
-			if(!strcmp(temp_result.name, name))
-			{
-				find = 1;
-				printw("\n\t========================================================");
-				printw("\n\t\t%s\n\t\t\t\t%ld\t%d. %d. %d.  |  %d : %d\n", temp_result.name, temp_result.point, temp_result.year, temp_result.month, temp_result.day, temp_result.hour, temp_result.min);
-			}
-		}
-		else
-		{
-			break;
+			find = 1;
+			printw("\n\t========================================================");
+			printw("\n\t\t%s\n\t\t\t\t%ld\t%d. %d. %d.  |  %d : %d\n", temp_result.name, temp_result.point, temp_result.year, temp_result.month, temp_result.day, temp_result.hour, temp_result.min);
 		}
 	}
 	printw("\n\t========================================================");
