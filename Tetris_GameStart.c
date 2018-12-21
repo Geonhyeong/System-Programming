@@ -14,167 +14,13 @@
 
 char tetris_table[21][10];
 
-char i_block[4][4][4] =
-	{
-			{0, 0, 0, 0,
-			 0, 0, 0, 0,
-			 1, 1, 1, 1,
-			 0, 0, 0, 0},
-
-			{0, 0, 1, 0,
-			 0, 0, 1, 0,
-			 0, 0, 1, 0,
-			 0, 0, 1, 0},
-
-			{0, 0, 0, 0,
-			 0, 0, 0, 0,
-			 1, 1, 1, 1,   
-			 0, 0, 0, 0},
-
-			{0, 0, 1, 0,
-			 0, 0, 1, 0,
-			 0, 0, 1, 0,
-			 0, 0, 1, 0}
-	};
-
-char t_block[4][4][4] =
-
-	{
-			{0, 1, 0, 0,
-			 0, 1, 1, 0,
-			 0, 1, 0, 0,
-			 0, 0, 0, 0},
-
-			{0, 0, 0, 0,
-			 1, 1, 1, 0,
-			 0, 1, 0, 0,
-			 0, 0, 0, 0},
-
-			{0, 1, 0, 0,
-			 1, 1, 0, 0,
-			 0, 1, 0, 0,
-			 0, 0, 0, 0},
-
-			{0, 1, 0, 0,
-			 1, 1, 1, 0,
-			 0, 0, 0, 0,
-			 0, 0, 0, 0}
-	};
-
-char s_block[4][4][4] =
-	{
-			{1, 0, 0, 0,
-			 1, 1, 0, 0,
-			 0, 1, 0, 0,
-			 0, 0, 0, 0},
-
-			{0, 1, 1, 0,
-			 1, 1, 0, 0,
-			 0, 0, 0, 0,
-			 0, 0, 0, 0},
-
-			{0, 1, 0, 0,
-			 0, 1, 1, 0,
-			 0, 0, 1, 0,
-			 0, 0, 0, 0},
-
-			{0, 0, 0, 0,
-			 0, 1, 1, 0,
-			 1, 1, 0, 0,
-			 0, 0, 0, 0}
-	};
-
-char z_block[4][4][4] =
-	{
-			{0, 1, 0, 0,
-			 1, 1, 0, 0,
-			 1, 0, 0, 0,
-			 0, 0,0, 0},
-
-			{1, 1, 0, 0,
-			 0, 1, 1, 0,
-			 0, 0, 0, 0,
-			 0, 0, 0, 0},
-
-			{0, 0, 1, 0,
-			 0, 1, 1, 0,
-			 0, 1, 0, 0,
-			 0, 0, 0, 0},
-
-			{0, 0, 0, 0,
-			 1, 1, 0, 0,
-			 0, 1, 1, 0,
-			 0, 0, 0, 0}
-	};
-
-char l_block[4][4][4] =
-	{
-			{1, 0, 0, 0,
-			 1, 0, 0, 0,
-			 1, 1, 0, 0,
-			 0, 0, 0, 0},
-
-			{1, 1, 1, 0,
-			 1, 0, 0, 0,
-			 0, 0, 0, 0,
-			 0, 0, 0, 0},
-
-			{0, 1, 1, 0,
-			 0, 0, 1, 0,
-			 0, 0, 1, 0,
-			 0, 0, 0, 0},
-
-			{0, 0, 0, 0,
-			 0, 0, 1, 0,
-			 1, 1, 1, 0,
-			 0, 0, 0, 0}
-	};
-
-char j_block[4][4][4] =
-	{
-			{0, 1, 0, 0,
-			 0, 1, 0, 0,
-			 1, 1, 0, 0,
-			 0, 0, 0, 0},
-
-			{1, 0, 0, 0,
-			 1, 1, 1, 0,
-			 0, 0, 0, 0,
-			 0, 0, 0, 0},
-
-			{1, 1, 0, 0,
-			 1, 0, 0, 0,
-			 1, 0, 0, 0,
-			 0, 0, 0, 0},
-
-			{1, 1, 1, 0,
-			 0, 0, 1, 0,
-			 0, 0, 0, 0,
-			 0, 0, 0, 0}
-	};
-
-char o_block[4][4][4] =
-	{
-			{1, 1, 0, 0,
-			 1, 1, 0, 0,
-			 0, 0, 0, 0,
-			 0, 0, 0, 0},
-
-			{1, 1, 0, 0,
-			 1, 1, 0, 0,
-			 0, 0, 0, 0,
-			 0, 0, 0, 0},
-
-			{1, 1, 0, 0,
-			 1, 1, 0, 0,
-			 0, 0, 0, 0,
-			 0, 0, 0, 0},
-
-			{1, 1, 0, 0,
-			 1, 1, 0, 0,
-			 0, 0, 0, 0,
-			 0, 0, 0, 0}
-	};
+extern char i_block;
+extern char t_block;
+extern char s_block;
+extern char z_block;
+extern char j_block;
+extern char o_block;
+extern char l_block;
 
 int block_number = 0;  /*현재 블록 넘버 변수*/
 int next_block_number = 0; /*다음 블록 넘버 변수 */
@@ -236,42 +82,6 @@ int init_tetris_table(void)
 
 
 
-
-/*문자를 바로 입력 받을 수 있는 함수*/
-int _getch(void)
-{
-             char   ch;
-             int   error;
-             static struct termios Otty, Ntty;
-
-             fflush(stdout);
-             tcgetattr(0, &Otty);
-             Ntty = Otty;
-             Ntty.c_iflag  =  0;
-             Ntty.c_oflag  =  0;
-             Ntty.c_lflag &= ~ICANON;
-#if 1
-            Ntty.c_lflag &= ~ECHO;
-#else
-            Ntty.c_lflag |=  ECHO;
-#endif
-            Ntty.c_cc[VMIN]  = CCHAR;
-            Ntty.c_cc[VTIME] = CTIME;
-
-#if 1
-#define FLAG TCSAFLUSH
-#else
-#define FLAG TCSANOW
-#endif
-
-            if (0 == (error = tcsetattr(0, FLAG, &Ntty)))
-            {
-                       error  = read(0, &ch, 1 );
-                       error += tcsetattr(0, FLAG, &Otty);
-            }
-
-            return (error == 1 ? (int) ch : -1 );
-}
 
 /* 타이머에 콜백함수로 등록되어 계속 새로고침 하면서 호출되는 함수. 키입력 확인,  화면새로고침, 한줄완성검사등의 계속 상태가 변함을 확인해야 되는 함수를 호출한다 */
 int _refresh(int signum)
@@ -628,26 +438,6 @@ int check_one_line(void)
 	}
 
 	return 0;
-}
-
-int set_ticker(int game_state)
-{
-        struct itimerval new_timeset;
-	
-	if(game_state==GAME_START){
-		new_timeset.it_interval.tv_sec  = 0;        /* set reload  */
-		new_timeset.it_interval.tv_usec = 1;      /* new ticker value */
-		new_timeset.it_value.tv_sec     = 0  ;      /* store this   */
-		new_timeset.it_value.tv_usec    = 1 ;     /* and this     */
-	}
-	else {
-		new_timeset.it_interval.tv_sec  = 0;        /* set reload  */
-		new_timeset.it_interval.tv_usec = 0;      /* new ticker value */
-		new_timeset.it_value.tv_sec     = 0  ;      /* store this   */
-		new_timeset.it_value.tv_usec    = 0 ;     /* and this     */
-	}
-
-	return setitimer(ITIMER_VIRTUAL, &new_timeset, NULL);
 }
 
 void game_end(){
