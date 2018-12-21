@@ -1,2 +1,0 @@
-# System-Programming
-Kyeongpook National University_IT_Computer Science Engineering_System Programming Assignment
